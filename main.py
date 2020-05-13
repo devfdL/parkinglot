@@ -1,7 +1,3 @@
-# USAGE
-# python text_detection_video.py --east frozen_east_text_detection.pb
-
-# import the necessary packages
 from imutils.video import VideoStream
 from imutils.video import FPS
 from imutils.object_detection import non_max_suppression
