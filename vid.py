@@ -89,7 +89,7 @@ cascade = cv2.CascadeClassifier('cars.xml')
 
 
 print("[INFO] starting video stream...")
-vs = VideoStream(2).start()
+vs = VideoStream("media/test.mp4").start()
 
 
 # start the FPS throughput estimator
@@ -112,12 +112,12 @@ while True:
 	orig = frame.copy()
 
 	# car detection
-	#gray = cv2.cvtColor(orig, cv2.COLOR_BGR2GRAY)
-	## haar detection.
-	#cars = cascade.detectMultiScale(gray, 1.2, 3)
+	gray = cv2.cvtColor(orig, cv2.COLOR_BGR2GRAY)
+	# haar detection.
+	cars = cascade.detectMultiScale(gray, 1.2, 3)
 
-	#for (a, b, c, d) in cars:
-	#  cv2.rectangle(orig, (a, b), (a+c, b+d), (0, 0, 255), 2)
+	for (a, b, c, d) in cars:
+	  cv2.rectangle(orig, (a, b), (a+c, b+d), (0, 0, 255), 2)
 	
 	# end of car detection
 
@@ -160,14 +160,14 @@ while True:
 	parkingLot = 14 # Change the value with empty parking lot 
 	available = len(boxes)
 	used = parkingLot - available
-	#carCount = len(cars)
+	carCount = len(cars)
 
 	# add label for parking lot information
 	font = cv2.FONT_HERSHEY_SIMPLEX
 	cv2.putText(orig,"Parking Lot: " + str(parkingLot), (30,50),font, 1.1, (0,255,0),2)
 	cv2.putText(orig,"Available: " + str(available), (30,100),font, 1.1, (0,255,0),2)
 	cv2.putText(orig,"Used: " + str(used), (30,150),font, 1.1, (0,0,255),2)
-	#cv2.putText(orig,"Cars: " + str(carCount), (30,200),font, 1.1, (0,0,255),2)
+	cv2.putText(orig,"Cars: " + str(carCount), (30,200),font, 1.1, (0,0,255),2)
 
 	# update the FPS counter
 	fps.update() 
